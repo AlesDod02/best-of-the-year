@@ -14,32 +14,20 @@ import java.util.List;
 
 public class SongsController {
     @GetMapping
+
     private  String getSongs(Model model){
-        List<Song> Songs = getSongs();
-        model.addAttribute("songs", Songs);
+        List<Song> songs = getSongs();
+        model.addAttribute("songs", songs);
         return "Songs";
 
     }
-
-
-    //private String getSongsTitles(@RequestParam List<Song>Songs, Model model){
-      //  model.addAttribute("getTitles",  )
-    //}
-    @GetMapping("/titles")
-    private String getTitles(List<Song> Songs, Model model){
-
-        for (int i = 0; i < Songs.size() ; i++) {
-            return Songs.get(i).getTitle();
-
-
-
-
-        }
-        model.addAttribute("title", Songs.getTitle());
-        return "Songs";
-
-
+    @GetMapping("/song/{id}")
+    public String getSongDetails(@RequestParam int id, Model model) {
+        Song song = getSongById(id);
+                model.addAttribute("song", song);
+        return "song_details";
     }
+
 
     private List<Song> getSongs() {
         List<Song> AllSongs = new ArrayList<>();
@@ -51,6 +39,16 @@ public class SongsController {
         AllSongs.add(new Song(646346, "Canzone5", "Matteo"));
 
         return AllSongs;
+    }
+    private Song getSongById(int songId) {
+        Song song = null;
+        for (Song p : getSongs()) {
+            if (p.getId() == songId ){
+                song = p;
+                break;
+            }
+        }
+        return song;
     }
 
 
