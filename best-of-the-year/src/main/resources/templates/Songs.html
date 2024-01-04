@@ -8,7 +8,7 @@
 <h1>Ecco le tue Canzoni <span th:text="${songs}"></span></h1>
 <ul>
     <li th:each="current : ${songs}">
-        <span th:text="${current.title}"></span>
+        <a th:href="@{/Songs/details(id=${current.id})}" th:text="${current.title}"></a>
 
     </li>
 </ul>

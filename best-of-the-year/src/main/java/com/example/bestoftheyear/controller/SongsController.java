@@ -21,11 +21,11 @@ public class SongsController {
         return "Songs";
 
     }
-    @GetMapping("/song/{id}")
+    @GetMapping("/details")
     public String getSongDetails(@RequestParam int id, Model model) {
         Song song = getSongById(id);
                 model.addAttribute("song", song);
-        return "song_details";
+        return "SongDetails";
     }
 
 
